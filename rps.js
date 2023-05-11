@@ -1,6 +1,6 @@
 function getComputerChoice() {
     let choices = ["rock", "paper", "scissors"];
-    let randomNumber = Math.floor(Math.random() * 3); // Generate a random number between 0 and 2
+    let randomNumber = Math.floor(Math.random() * choices.length); // Generate a random number between 0 and 2
     return choices[randomNumber]; // Return the corresponding choice
 }
 
@@ -29,8 +29,6 @@ function playRound(playerChoice, computerChoice) {
     }
   }
    
-  console.log(playRound(playerChoice, computerChoice));
-
   function game(){
     playRound();
     console.log(playRound);
