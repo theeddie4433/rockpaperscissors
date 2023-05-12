@@ -40,10 +40,11 @@ function getComputerChoice() {
       } else if (result.startsWith("You lose!")) {
         computerScore++;
       }
+
+      console.log(`Man: ${playerScore}`);
+      console.log(`Machine: ${computerScore}`);  
     }
   
-    console.log(`Player Score: ${playerScore}`);
-    console.log(`Computer Score: ${computerScore}`);
   
     if (playerScore > computerScore) {
       console.log("You won the game!");
