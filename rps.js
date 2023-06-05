@@ -4,7 +4,7 @@ function getComputerChoice() {
     return choices[randomNumber];
   }
   
-  function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
     if (computerSelection === playerSelection) {
       return "It's a tie!";
     } else if (computerSelection === "scissors" && playerSelection === "rock") {
@@ -20,26 +20,26 @@ function getComputerChoice() {
     } else if (computerSelection === "rock" && playerSelection === "scissors") {
       return "You lose! Rock beats scissors.";
     }
-  }
+}
   
-  function game() {
+function playGame() {
     let playerScore = 0;
     let computerScore = 0;
   
     for (let i = 0; i < 5; i++) {
-      let computerSelection = getComputerChoice();
-      let playerSelection = prompt("Choose: Rock, paper, or scissors?");
-      playerSelection = playerSelection.toLowerCase();
-      computerSelection = computerSelection.toLowerCase();
+        let computerSelection = getComputerChoice();
+        let playerSelection = prompt("Choose: Rock, paper, or scissors?");
+        playerSelection = playerSelection.toLowerCase();
+        computerSelection = computerSelection.toLowerCase();
   
-      let result = playRound(playerSelection, computerSelection);
-      console.log(result);
+        let result = playRound(playerSelection, computerSelection);
+        console.log(result);
   
-      if (result.startsWith("You win!")) {
+        if (result.startsWith("You win!")) {
         playerScore++;
-      } else if (result.startsWith("You lose!")) {
+        } else if (result.startsWith("You lose!")) {
         computerScore++;
-      }
+        }
 
       console.log(`Man: ${playerScore}`);
       console.log(`Machine: ${computerScore}`);  
@@ -47,12 +47,12 @@ function getComputerChoice() {
   
   
     if (playerScore > computerScore) {
-      console.log("You won the game!");
+        console.log("You won the game!");
     } else if (computerScore > playerScore) {
-      console.log("You lost the game!");
+        console.log("You lost the game!");
     } else {
-      console.log("It's a tie game!");
+        console.log("It's a tie game!");
     }
   }
   
-  game();
+  playGame();
