@@ -4,6 +4,8 @@ function getComputerChoice() {
     return choices[randomNumber];
 }
 
+const button = document.querySelector('.button');
+
 const scissors = document.querySelector("#scissors");
 const paper = document.querySelector("#paper");
 const rock = document.querySelector('#rock');
@@ -15,26 +17,33 @@ const roundResult = document.querySelector('#result');
 const modal = document.getElementById("myModal");
 const modalText = document.getElementById("finalResult");
 
+const playAgain = document.getElementById("replay");
+
 function openModal() {
-  modal.style.display = "block";
+  modal.style.display = "flex";
 }
 
 function closeModal() {
   modal.style.display = "none";
 }
 
-window.onclick = function (event) {
+button.addEventListener('click', function() {
+  // Alternar la clase 'clicked' al hacer clic
+  button.classList.toggle('clicked');
+});
+
+/*window.onclick = function (event) {
   if (event.target == modal) {
     closeModal();
   }
-};
+};*/
 
 let playerScore = 0;
 let computerScore = 0;
   
 function playRound(playerSelection, computerSelection) {
   if (computerSelection === playerSelection) {
-    return "It's a tie!";
+    return `It's a tie: ${playerSelection} clashed`;
   } else if (
     (computerSelection === "scissors" && playerSelection === "rock") ||
     (computerSelection === "paper" && playerSelection === "scissors") ||
@@ -59,14 +68,11 @@ function checkGameOver() {
     rock.removeEventListener("click", handleRockClick);
 
     if (playerScore > computerScore) {
+      modalText.textContent = "¡Gano la humanidad!";
       openModal();
-      modalText.textContent = "You won the game!";
     } else if (computerScore > playerScore) {
+      modalText.textContent ="¡Gano la maquina!";
       openModal();
-      modalText.textContent ="You lost the game!";
-    } else {
-      openModal();
-      modalText.textContent = "It's a tie game!";
     }
   }
 }
@@ -79,9 +85,13 @@ function handleScissorsClick() {
   roundResult.textContent = result;
 
   if (result.startsWith("You win!")) {
+    roundResult.style.cssText = "background-color: green";
     playerScore++;
   } else if (result.startsWith("You lose!")) {
+    roundResult.style.cssText = "background-color: #e73d3d";
     computerScore++;
+  } else {
+    roundResult.style.cssText = "background-color: #3DD1E7";
   }
 
   updateScores();
@@ -95,9 +105,13 @@ function handlePaperClick() {
   roundResult.textContent = result;
 
   if (result.startsWith("You win!")) {
+    roundResult.style.cssText = "background-color: green";
     playerScore++;
   } else if (result.startsWith("You lose!")) {
+    roundResult.style.cssText = "background-color: #e73d3d";
     computerScore++;
+  } else {
+    roundResult.style.cssText = "background-color: #3DD1E7";
   }
 
   updateScores();
@@ -111,15 +125,32 @@ function handleRockClick() {
   roundResult.textContent = result;
 
   if (result.startsWith("You win!")) {
+    roundResult.style.cssText = "background-color: green";
     playerScore++;
   } else if (result.startsWith("You lose!")) {
+    roundResult.style.cssText = "background-color: #e73d3d";
     computerScore++;
+  } else {
+    roundResult.style.cssText = "background-color: #3DD1E7";
   }
 
   updateScores();
   checkGameOver();
 }
 
+function resetGame(){
+  playerScore = 0;
+  computerScore = 0;
+  updateScores();
+  closeModal();
+  roundResult.textContent = " ";
+
+  scissors.addEventListener('click', handleScissorsClick);
+  paper.addEventListener('click', handlePaperClick);
+  rock.addEventListener('click', handleRockClick);
+}
+
 scissors.addEventListener('click', handleScissorsClick);
 paper.addEventListener('click', handlePaperClick);
 rock.addEventListener('click', handleRockClick);
+playAgain.addEventListener('click', resetGame);
